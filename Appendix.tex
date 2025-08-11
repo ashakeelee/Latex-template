@@ -1,0 +1,108 @@
+\input{style/Appstyle}
+
+\Appendixhead
+
+\section{Confidence intervals for a binomial proportion}
+
+We review some basic concepts from theoretical statistics as necessary; see [1] for a thorough treatment. Let $\theta$ be the probability of a binary event (e.g., severe hallucinations that come to our attention), and $X$ the number of times the event occurs in $n$ independent samples. We seek a confidence interval for $\theta$ in this binomial sampling model. It is interesting to note that this problem continues to stimulate discussion and innovation in the statistics literature (see [2] and its ensuing discussion). For example, the Wald interval has been strongly disavowed, but only relatively recently [2]. It appears to us that much of this debate stems from various disagreements about the purpose of the interval, suggesting that its resolution should ultimately be decision-theoretic. This is worth keeping in mind when interpreting the intervals in our discussion. For our purposes in the attached report, the one-sided Clopper-Pearson interval, which arises by inverting tests of the form $\left\{X \leq k_{\theta}\right\}$, where $k_{\theta}$ is determined by the hypothesized $\theta$, is compelling - possibly, uniquely so. [4,5] give arguments and evidence in favor of the last point.
+
+\subsection{Confidence Interval for $\theta$}
+
+For completeness, the (one-sided) Clopper-Pearson interval is constructed as follows. Fix $\alpha \in(0,1)$. A size $\alpha$ test of the hypothesis $H_{0}: \theta=\theta_{0}$ is provided by the critical region $\left\{X \leq k_{\theta_{0}}\right\}$ where
+\begin{equation}\label{eq:1}
+k_{\theta_{0}}:=\max \left\{k \in\{-1,0, \ldots, n\}: P_{\theta_{0}}(X \leq k) \leq \alpha\right\}, 
+\end{equation}
+
+meaning that $P_{\theta_{0}}\left(X \leq k_{\theta_{0}}\right) \leq \alpha.$\footnote{-1 is included in the range that $k$ is maximized over for bookkeeping reasons. $k_{\theta}$ will be -1 when there is no size $\alpha$ critical region in this form except the empty set.} Note that the test is 'one-sided': targeting alternatives where $\theta$ is smaller than the null hypothesis. More colloquially, the tests ask: 'Is $X$ suspiciously small for $H_{0}$ ?'. It is the textbook test for these alternative hypotheses.
+
+The set of all hypotheses that the data $X$ fails to reject at level $\alpha,\left\{\theta^{\prime}: X>k_{\theta^{\prime}}\right\}$, is a level ( $1-\alpha$ ) confidence interval for $\theta$. That is, $P_{\theta}\left(\theta \in\left\{\theta^{\prime}: X>k_{\theta^{\prime}}\right\}\right) \geq 1-\alpha$ under the binomial sampling model. This is because, by construction, $P_{\theta}\left(X \leq k_{\theta}\right) \leq \alpha$ for all $\theta$. Constructing an interval from a family of hypothesis tests in this way is called 'inverting' the tests.
+
+When the data $X$ takes the value 0 , this interval takes a simple closed form:
+
+\begin{align}
+\label{eq:2}
+\left\{\theta^{\prime}: X>k_{\theta^{\prime}}\right\} & =\left\{\theta^{\prime}: 0>k_{\theta^{\prime}}\right\} \\
+\label{eq:3}
+& =\left\{\theta^{\prime}: P_{\theta^{\prime}}(X=0)>\alpha\right\}=\left\{\theta^{\prime}:\left(1-\theta^{\prime}\right)^{n}>\alpha\right\}=\left\{\theta^{\prime}: \theta^{\prime}<1-\alpha^{1 / n}\right\}  \\
+\label{eq:4}
+& =\left[0,1-\alpha^{1 / n}\right) 
+\end{align}
+Equivalently, we can say that $1-\alpha^{1 / n}$ is a level $(1-\alpha)$ confidence upper bound for $\theta$. Note that the reasoning does not involve approximation. (It is an 'exact' interval.)\footnote{
+The interval is a one-sided variation on the more commonly-discussed Clopper-Pearson interval. To explain the difference, ClopperPearson inverts tests of the form $\left\{X \leq k_{\theta}^{-}\right\} \cup\left\{X \geq k_{\theta}^{+}\right\}$, where
+\begin{equation}\label{eq:5}
+k_{\theta_{0}}^{-}:=\max \left\{k \in\{-1,0, \ldots, n+1\}: P_{\theta_{0}}(X \leq k) \leq \alpha / 2\right\} 
+\end{equation}
+and
+\begin{equation}\label{eq:6}
+k_{\theta_{0}}^{+}:=\min \left\{k \in\{-1,0, \ldots, n+1\}: P_{\theta_{0}}(X \geq k) \leq \alpha / 2\right\}, 
+\end{equation}
+for which the corresponding (inverted) level $(1-\alpha)$ confidence interval is $\left\{\theta: k_{\theta}^{-}<X<k_{\theta}^{+}\right\}$.
+
+When $X=0$, the (conventional two-sided) C-P C.I. thus takes the form:
+\begin{align}
+\left\{\theta: k_{\theta}^{-}<X<k_{\theta}^{+}\right\} 
+\label{eq:7}
+& =\left\{\theta: k_{\theta}^{-}<0\right\}  \\
+\label{eq:8}
+& =\left\{\theta: P_{\theta}(X=0)>\alpha / 2\right\} \\
+\label{eq:9}
+& =\left[0,1-\left(\frac{\alpha}{2}\right)^{1 / n}\right) . 
+\end{align}
+}
+
+\subsection{Confidence interval for $p$ assuming $\theta \geq p c_{L}$}
+
+Suppose now it is known that that $\theta \geq p c_{L}$, where $c_{L}$ is known. Then it follows that $\left\{\theta \in\left\{\theta^{\prime}: X>k_{\theta^{\prime}}\right\}\right\} \subseteq\left\{p c_{L} \in\left\{\theta^{\prime}\right.\right.$ : $\left.\left.X>k_{\theta^{\prime}}\right\}\right\}$. Thus $P_{\theta}\left(p c_{L} \in\left\{\theta^{\prime}: X>k_{\theta^{\prime}}\right\}\right) \geq P_{\theta}\left(\theta \in\left\{\theta^{\prime}: X>k_{\theta^{\prime}}\right\}\right) \geq 1-\alpha$. That is, $\left\{\theta^{\prime} / c_{L}: X>k_{\theta^{\prime}}\right\}$ is a $(1-\alpha)$-level
+
+confidence interval for $p$. Now consider the case where $X=0$ :
+\begin{align}\label{eq:10}
+\left\{\theta^{\prime} / c_{L}: X>k_{\theta^{\prime}}\right\} & =\left\{\theta^{\prime} / c_{L}: 0>k_{\theta^{\prime}}\right\}  \\
+\label{eq:11}
+& =\left\{\theta^{\prime} / c_{L}: P_{\theta^{\prime}}(X=0)>\alpha\right\}=\left\{\theta^{\prime} / c_{L}:\left(1-\theta^{\prime}\right)^{n}>\alpha\right\}=\left\{\theta^{\prime} / c_{L}: \theta^{\prime}<1-\alpha^{1 / n}\right\}  \\
+\label{eq:12}
+& =\left[0, \frac{1-\alpha^{1 / n}}{c_{L}}\right)
+\end{align}
+That is, this confidence interval takes the form $\left[0, \frac{1-\alpha^{1 / n}}{c_{L}}\right)$ when $X=0$. Equivalently, we can say that $\frac{1-\alpha^{1 / n}}{c_{L}}$ is a level $(1-\alpha)$ confidence upper bound for $p$.
+
+\subsection{Application}
+
+Let $X$ be the number of severe hallucinations that come to our attention, let $\theta$ be the probability that a severe hallucination will come to our attention, and let $c_{L}$ be a lower bound on the conditional probability $c$ that, given the knowledge that a given summary contains a severe hallucination, it will come to our attention. Finally, let $p$ be the probability that a summary contains a severe hallucination. It follows that $\theta=p c \geq p c_{L}$, and therefore
+$$
+\left[0, \frac{1-\alpha^{1 / n}}{c_{L}}\right)
+$$
+is a level $(1-\alpha)$ confidence interval for $p$, the probability of a severe hallucination, in the case that $X$, the number of severe hallucinations that come to our attention, is $0 .\left(1-\alpha^{1 / n}\right) / c_{L}$ is a level $(1-\alpha)$ upper bound in that same case.
+
+\subsection{Some Issues of Interpretation}
+
+The above interval appears compelling to us because:
+
+\begin{itemize}
+    \item The textbook one-sided test is natural for questions of the form: what values of $\theta$ are incompatible with $X$ because those values are too large? That is, we are interested in questions such as: how strongly does the data suggest that $\theta<10^{-5}$ or $p<10^{-5}$ ? And this is what the interval indicates. For these intervals, the statement that $10^{-5}$ is contained in the level $1-\alpha$ one-sided C-P interval is equivalent to the statement that we would reject $H_{0}: \theta=10^{-5}$ with a $p$-value $\leq \alpha$ using the natural (textbook) one-sided hypothesis test for a binomial proportion ([5] contains a related expression of this point).
+    \item It is exact, meaning that no probability approximations are involved. This seems particularly relevant for small (indeed, tiny) $\theta$ and $p$. The uncertainties that remain, beyond conservatism, are modeling uncertainties. These are uncertainties about the modeling assumptions themselves, rather than uncertainty about the implications those assumptions have for inference. For our use cases, any consequences of conservatism are themselves conservative. But it is not easy to conceive of a natural and exact alternative that is less conservative.
+    \item The interval has a simple derivation and form.
+\end{itemize}
+
+Each of the above arguments is additionally stronger in the case $X=0$.
+
+\section{Comments on the probabilistic meaning of rate for a binary event}
+
+Finally, it is worth noting that the word 'rate' has ambiguous colloquial uses. To take the example of coin-tossing, if you toss a coin ten times and obtain 6 heads, in various settings it is common to say that the 'observed rate' or the 'empirical rate' of heads if 0.6 . However, this could be different than the 'probability of heads' which is a 'theoretical' rate (and which is often even called the 'true' rate, colloquially). Loosely speaking, the observed rate differs from the theoretical rate because of extraneous factors that also contribute to the observed rate's fluctuations. The observed and collective consequences of these extraneous factors are often explained as 'sampling variability.' Presumably, what is of importance to the decision-maker faced with decisions implicated by future tosses is, rather, the probability of heads. The observed rate (e.g., $X / n$, in our example) is, instead, used to infer theoretical rates (e.g., $\theta$ or $p$ ). Nevertheless, the meaning of theoretical quantities is derived from modeling assumptions, inescapably. [3] provides a useful pragmatic discussion of the role of statistical modeling assumptions in contemporary practice, and places particular emphasis on the differential roles of theoretical and observable quantities.
+
+
+\begin{thebibliography}{99}
+\bibitem{app1}
+Casella, George, and Roger Berger. \textit{Statistical Inference}. CRC Press, 2024.
+
+\bibitem{app2}
+Brown, Lawrence D., Tony T. Cai, and Anirban DasGupta. "Interval estimation for a binomial proportion." \textit{Statistical Science}, vol. 16, no. 2, 2001, pp. 101–133.
+
+\bibitem{app3}
+Kass, Robert E. "Statistical inference: The big picture." \textit{Statistical Science}, vol. 26, no. 1, 2011, pp. 1–9.
+
+\bibitem{app4}
+Easterling, Ronald G. "There’s nothing wrong with Clopper–Pearson binomial confidence limits." \textit{The American Statistician}, vol. 69, no. 2, 2015, pp. 154–155.
+
+\bibitem{app5}
+McCracken, C. E., and S. W. Looney. "On finding the upper confidence limit for a binomial proportion when zero successes are observed." \textit{Journal of Biometry and Biostatistics}, vol. 8, no. 2, 2017, p. 338.
+
+\end{thebibliography}
