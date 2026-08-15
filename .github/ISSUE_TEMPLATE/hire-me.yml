@@ -1,0 +1,76 @@
+name: Request a LaTeX project quote
+description: Share a non-confidential project outline for LaTeX, Overleaf, typesetting, or document-formatting work.
+title: "[Project inquiry]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your interest in working with me. This form creates a public GitHub issue, so do not include confidential, unpublished, personal, or proprietary content. A general description is enough to begin.
+
+  - type: dropdown
+    id: project_type
+    attributes:
+      label: Project type
+      description: Select the option closest to your project.
+      options:
+        - Custom LaTeX or Overleaf template
+        - Research paper or journal formatting
+        - Thesis or dissertation formatting
+        - Technical report or white paper
+        - Word or Google Docs to LaTeX conversion
+        - Existing LaTeX cleanup or repair
+        - Other document-formatting work
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Project scope
+      description: Describe the deliverable, formatting standard, and major requirements without sharing sensitive content.
+      placeholder: I need a two-column Overleaf template for a technical report with custom headings, figures, tables, and numeric references.
+    validations:
+      required: true
+
+  - type: input
+    id: pages
+    attributes:
+      label: Approximate page count
+      placeholder: 15-20 pages
+
+  - type: dropdown
+    id: source_format
+    attributes:
+      label: Current source format
+      options:
+        - LaTeX or Overleaf
+        - Microsoft Word
+        - Google Docs
+        - PDF
+        - Markdown or plain text
+        - Content is not ready yet
+    validations:
+      required: true
+
+  - type: input
+    id: deadline
+    attributes:
+      label: Preferred deadline
+      placeholder: YYYY-MM-DD or flexible
+    validations:
+      required: true
+
+  - type: input
+    id: budget
+    attributes:
+      label: Budget range (optional)
+      description: A range helps determine the most suitable scope and delivery plan.
+      placeholder: USD 200-400
+
+  - type: checkboxes
+    id: public_notice
+    attributes:
+      label: Public issue confirmation
+      options:
+        - label: I understand this inquiry is public and have not included confidential or proprietary information.
+          required: true

@@ -1,0 +1,47 @@
+name: Build PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**.tex"
+      - "**.bib"
+      - "style/**"
+      - "figure/**"
+      - ".github/workflows/build-pdf.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@4.1.0
+        with:
+          root_file: main.tex
+
+      - name: Install PDF rendering tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes poppler-utils
+
+      - name: Render first-page preview
+        run: |
+          mkdir -p preview
+          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/first-page
+
+      - name: Upload PDF and preview
+        uses: actions/upload-artifact@v7
+        with:
+          name: latex-template
+          path: |
+            main.pdf
+            preview/first-page.png
